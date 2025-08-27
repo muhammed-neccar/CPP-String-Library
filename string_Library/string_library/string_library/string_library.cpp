@@ -1,19 +1,19 @@
+#include "clsString.h"
 #include <iostream>
 using namespace std;
-#include "clsString.h"
-#include "clsChar.h"
 
-int main()
-{
-	clsString string1("Mohammed  adel najjar");
+int main() {
+    clsString str("hello world, oop in c++");
 
-	cout << string1.Length() <<endl;
-	cout << clsString::Length("muhammed neccar") <<endl;
+    cout << "Original: " << str.value << endl;
 
-		
+    str.UpperFirstLetterOfEachWord();
+    cout << "Capitalize words: " << str.value << endl;
 
+    cout << "Word count: " << str.CountWords() << endl;
 
-	return 0;
+    str.RemovePunctuationsFromString();
+    cout << "No punctuations: " << str.value << endl;
+
+    return 0;
 }
-
-

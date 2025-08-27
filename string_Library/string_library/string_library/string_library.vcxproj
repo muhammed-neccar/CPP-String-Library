@@ -130,7 +130,6 @@
     <ClCompile Include="string_library.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clsChar.h" />
     <ClInclude Include="clsString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

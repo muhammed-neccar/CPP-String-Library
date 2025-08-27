@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include "clsChar.h"
 using namespace std;
 #include <vector>
 #include<string>
@@ -9,9 +8,6 @@ class clsString
 {
 private:
 	string _value;
-
-	
-
 
 public:
 
@@ -33,41 +29,19 @@ public:
 	string Getvalue()
 	{
 		return _value;
-
 	}
 
 	__declspec(property(get = Getvalue, put = SetValue)) string value;
-
 
 	static short Length(string S1)
 	{
 		return S1.length();
 	};
 
-
 	short Length()
 	{
 		return _value.length();
 	};
-
-
-	static void PrintFirstLetterOfEachWord(string S1) {
-		bool isFirstLetter = true;
-		cout << "\nFirst letters of this string: \n";
-		for (short i = 0; i < S1.length(); i++)
-		{
-			if (S1[i] != ' ' && isFirstLetter)
-			{
-				cout << S1[i] << endl;
-			}
-			isFirstLetter = (S1[i] == ' ' ? true : false);
-		}
-	}
-
-	void PrintFirstLetterOfEachWord()
-	{
-		return PrintFirstLetterOfEachWord(_value);
-	}
 
 	static string  UpperFirstLetterOfEachWord(string S1) {
 		bool isFirstLetter = true;
@@ -83,9 +57,9 @@ public:
 	}
 
 
-	string UpperFirstLetterOfEachWord()
+	void UpperFirstLetterOfEachWord()
 	{
-		return UpperFirstLetterOfEachWord(_value);
+		_value = UpperFirstLetterOfEachWord(_value);
 	}
 
 	static string  LowerFirstLetterOfEachWord(string S1)
@@ -102,9 +76,9 @@ public:
 		return S1;
 	}
 
-	string LowerFirstLetterOfEachWord()
+	void LowerFirstLetterOfEachWord()
 	{
-		return LowerFirstLetterOfEachWord(_value);
+		_value = LowerFirstLetterOfEachWord(_value);
 	}
 
 
@@ -116,9 +90,9 @@ public:
 		} return S1;
 	}
 
-	string UpperAllString()
+	void UpperAllString()
 	{
-		return UpperAllString(_value);
+		_value = UpperAllString(_value);
 	}
 
 	static string  LowerAllString(string S1)
@@ -130,42 +104,29 @@ public:
 		return S1;
 	}
 
-	string LowerAllString()
+	void LowerAllString()
 	{
-		return LowerAllString(_value);
+		_value = LowerAllString(_value);
 	}
 
-	static short  CountCapitalLetters(string S1)
+	static char  InvertLetterCase(char char1)
 	{
-		short Counter = 0; for (short i = 0; i < S1.length(); i++)
+		return isupper(char1) ? tolower(char1) : toupper(char1);
+	}
+
+	static string  InvertAllStringLettersCase(string S1)
+	{
+		for (short i = 0; i < S1.length(); i++)
 		{
-			if (isupper(S1[i]))
-				Counter++;
+			S1[i] = InvertLetterCase(S1[i]);
 		}
-		return Counter;
+		return S1;
 	}
 
-	short CountCapitalLetters()
+	void InvertAllStringLettersCase()
 	{
-		return CountCapitalLetters(_value);
+		_value = InvertAllStringLettersCase(_value);
 	}
-
-	static short  CountSmallLetters(string S1)
-	{
-		short Counter = 0; for (short i = 0; i < S1.length(); i++)
-		{
-			if (islower(S1[i]))
-				Counter++;
-		}
-		return Counter;
-	}
-
-	short CountSmallLetters()
-	{
-		return CountSmallLetters(_value);
-	}
-
-
 
 
 	enum enWhatToCount { SmallLetters = 0, CapitalLetters = 1, All = 3 };
@@ -188,46 +149,50 @@ public:
 			Counter;
 	}
 
-	short CountLetters()
+	static short  CountCapitalLetters(string S1)
 	{
-		return CountLetters(_value);
-	}
 
-	static string  InvertAllStringLettersCase(string S1)
-	{
-		for (short i = 0; i < S1.length(); i++)
-		{
-			S1[i] = clsChar::InvertLetterCase(S1[i]);
-		}
-		return S1;
-	}
-
-	string InvertAllStringLettersCase()
-	{
-		return InvertAllStringLettersCase(_value);
-	}
-
-
-	static short  CountLetter(string S1, char Letter)
-	{
 		short Counter = 0;
+
 		for (short i = 0; i < S1.length(); i++)
 		{
-			if (S1[i] == Letter)
+
+			if (isupper(S1[i]))
 				Counter++;
+
 		}
+
 		return Counter;
 	}
 
-	short CountLetter(char Letter)
+	short  CountCapitalLetters()
 	{
-		return CountLetter(_value, Letter);
+		return CountCapitalLetters(_value);
 	}
 
 
+	static short  CountSmallLetters(string S1)
+	{
 
+		short Counter = 0;
 
-	static short  CountLetters(string S1, char Letter, bool MatchCase = true)
+		for (short i = 0; i < S1.length(); i++)
+		{
+
+			if (islower(S1[i]))
+				Counter++;
+
+		}
+
+		return Counter;
+	}
+
+	short  CountSmallLetters()
+	{
+		return CountSmallLetters(_value);
+	}
+
+	static short  CountSpecificLetters(string S1, char Letter, bool MatchCase = true)
 	{
 		short Counter = 0;
 		for (short i = 0; i < S1.length(); i++)
@@ -248,17 +213,23 @@ public:
 		return Counter;
 	}
 
-	short CountLetters(char Letter, bool MatchCase = true)
+	short CountspecificLetters(char Letter, bool MatchCase = true)
 	{
-		return CountLetters(_value, Letter, MatchCase);
+		return CountSpecificLetters(_value, Letter, MatchCase);
 	}
 
+	static bool IsVowel(char Ch1)
+	{
+		Ch1 = tolower(Ch1);
 
+		return ((Ch1 == 'a') || (Ch1 == 'e') || (Ch1 == 'i') || (Ch1 == 'o') || (Ch1 == 'u'));
+
+	}
 	static short  CountVowels(string S1)
 	{
 		short Counter = 0; for (short i = 0; i < S1.length(); i++)
 		{
-			if (clsChar::IsVowel(S1[i]))
+			if (IsVowel(S1[i]))
 				Counter++;
 		}
 		return Counter;
@@ -275,7 +246,7 @@ public:
 		cout << "\nVowels in string are: ";
 		for (short i = 0; i < S1.length(); i++)
 		{
-			if (clsChar::IsVowel(S1[i]))
+			if (IsVowel(S1[i]))
 
 				cout << S1[i] << "    ";
 		}
@@ -283,7 +254,7 @@ public:
 
 	void PrintVowels()
 	{
-		return PrintVowels(_value);
+		 PrintVowels(_value);
 	}
 
 
@@ -311,7 +282,7 @@ public:
 
 	void PrintEachWordInString()
 	{
-		return PrintEachWordInString(_value);
+		 PrintEachWordInString(_value);
 	}
 
 
@@ -362,9 +333,9 @@ public:
 		return "";
 	}
 
-	string TrimLeft()
+	void TrimLeft()
 	{
-		return TrimLeft(_value);
+		_value = TrimLeft(_value);
 	}
 
 
@@ -379,9 +350,9 @@ public:
 		} return"";
 	}
 
-	string TrimRight()
+	void TrimRight()
 	{
-		return TrimRight(_value);
+		_value = TrimRight(_value);
 	}
 
 
@@ -390,13 +361,13 @@ public:
 		return (TrimLeft(TrimRight(S1)));
 	}
 
-	string Trim()
+	void Trim()
 	{
-		return Trim(_value);
+		_value = Trim(_value);
 	}
 
 
-	static vector<string> SplitString(string S1, string Delim)
+	static vector<string> Split(string S1, string Delim)
 	{
 		vector<string> vString;
 		short pos = 0;
@@ -421,9 +392,9 @@ public:
 		return vString;
 	}
 
-	vector<string> SplitString(string Delim)
+	vector<string> Split(string Delim)
 	{
-		return SplitString(_value, Delim);
+		return Split(_value, Delim);
 	}
 
 
@@ -431,7 +402,7 @@ public:
 	{
 		vector<string> vString;
 		string S2 = "";
-		vString = SplitString(S1, " ");
+		vString = Split(S1, " ");
 		// declare 
 		vector<string>::iterator iter = vString.end();
 		while (iter != vString.begin())
@@ -443,13 +414,13 @@ public:
 		return S2;
 	}
 
-	string ReverseWordsInString()
+	void ReverseWordsInString()
 	{
-		return ReverseWordsInString(_value);
+		_value = ReverseWordsInString(_value);
 	}
 
 
-	static string ReplaceWordInStringUsingBuiltInFunction(string S1, string StringToReplace, string sRepalceTo)
+	static string ReplaceWord(string S1, string StringToReplace, string sRepalceTo)
 	{
 		short pos = S1.find(StringToReplace);
 		while (pos != std::string::npos)
@@ -461,9 +432,9 @@ public:
 		return S1;
 	}
 
-	string ReplaceWordInStringUsingBuiltInFunction(string StringToReplace, string sRepalceTo)
+	string ReplaceWord(string StringToReplace, string sRepalceTo)
 	{
-		return ReplaceWordInStringUsingBuiltInFunction(_value, StringToReplace, sRepalceTo);
+		return  ReplaceWord(_value, StringToReplace, sRepalceTo);
 	}
 
 
@@ -480,91 +451,29 @@ public:
 	return S2; 
 	}
 
-	string RemovePunctuationsFromString()
+	void RemovePunctuationsFromString()
 	{
-		return RemovePunctuationsFromString(_value);
+		_value = RemovePunctuationsFromString(_value);
 	}
 
-
-	struct sClient
-	{
-		string AccountNumber;
-		string PinCode;
-		string Name;
-		string Phone;
-		double AccountBalance;
-	};
-
-	sClient ReadNewClient()
-	{
-		sClient Client;
-		cout << "Enter Account Number? ";
-		getline(cin, Client.AccountNumber);
-		cout << "Enter PinCode? ";
-		getline(cin, Client.PinCode);
-		cout << "Enter Name? ";
-		getline(cin, Client.Name);
-		cout << "Enter Phone? ";
-		getline(cin, Client.Phone);
-		cout << "Enter AccountBalance? ";
-		cin >> Client.AccountBalance;
-		return Client;
-	}
-	
-
-
-	static string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
-	{ 
-		string stClientRecord = "";
-
-	stClientRecord += Client.AccountNumber + Seperator; 
-	stClientRecord += Client.PinCode + Seperator;    
-	stClientRecord += Client.Name + Seperator;    
-	stClientRecord += Client.Phone + Seperator;   
-	stClientRecord += to_string(Client.AccountBalance);
-
-	return stClientRecord; 
+	static void PrintFirstLetterOfEachWord(string S1) {
+		bool isFirstLetter = true;
+		cout << "\nFirst letters of this string: \n";
+		for (short i = 0; i < S1.length(); i++)
+		{
+			if (S1[i] != ' ' && isFirstLetter)
+			{
+				cout << S1[i] << endl;
+			}
+			isFirstLetter = (S1[i] == ' ' ? true : false);
+		}
 	}
 
-	string ConvertRecordToLine(string Seperator = "#//#")
+	void PrintFirstLetterOfEachWord()
 	{
-		return ConvertRecordToLine(ReadNewClient());
+		PrintFirstLetterOfEachWord(_value);
 	}
-
-
-	
-	static sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
-	{
-		sClient Client;
-		vector<string> vClientData; 
-		vClientData = SplitString(Line, Seperator);  
-		Client.AccountNumber = vClientData[0]; 
-		Client.PinCode = vClientData[1];   
-		Client.Name = vClientData[2];  
-		Client.Phone = vClientData[3]; 
-		Client.AccountBalance = stod(vClientData[4]);
-		//cast string to double
-		return Client; 
-	}
-
-	sClient ConvertLinetoRecord(string Seperator = "#//#")
-	{
-		return ConvertLinetoRecord(_value, Seperator);
-	}
-
-
-	static void PrintClientRecord(sClient Client)
-	{
-		cout << "\n\nThe following is the extracted client record:\n";
-		cout << "\nAccout Number: " << Client.AccountNumber;    
-		cout << "\nPin Code     : " << Client.PinCode; 
-		cout << "\nName         : " << Client.Name;    
-		cout << "\nPhone        : " << Client.Phone;  
-		cout << "\nAccount Balance: " << Client.AccountBalance; 
-	}
-
 	
 
 
 };
-
